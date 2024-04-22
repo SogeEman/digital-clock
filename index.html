@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>⏰ DIGITAL CLOCK</title> <!-- Changed title to all capital letters -->
+    <style> 
+.container {
+            background-color: #08ed63; /* Set background color for the container */
+        }
+
+        .clock-container {
+            background-color: #aa670f; /* Set background color for the clock container */
+            padding: 10px; /* Add padding to the clock container */
+            border-radius: 10px; /* Add border radius to the clock container */
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Add box shadow to the clock container */
+        }
+
+        .time-zone {
+            font-size: 20px; /* Adjust the font size of the time zone text */
+            font-weight: bold; /* Make the time zone text bold */
+            margin-top: 15px; /* Add top margin to create space between clock and time zone */
+            padding-left: 10px; /* Add left padding for better alignment */
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #13456b; /* Set background color */
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        .clock-container {
+            margin-top: 10px; /* Adjust top margin as needed */
+            text-align: center; /* Align clock and time zone text to center */
+            display: flex; /* Use flexbox to align clock and image horizontally */
+            align-items: center; /* Center clock and image vertically */
+            justify-content: space-between; /* Distribute space evenly between clock and time zone */
+            flex-direction: row; /* Arrange clock and time zone horizontally */
+        }
+
+        .clock {
+            font-family: Arial, sans-serif; /* Set font for clock */
+            font-size: 50px; /* Adjust the font size of the clock text */
+            margin-bottom: 15px; /* Adjust bottom margin as needed */
+            padding-right: 10px;
+        }
+
+       
+
+        .clock-image {
+            width: 80px; /* Adjust the width of the clock image */
+            margin-top: 15px; /* Adjust top margin as needed */
+        }
+
+        #credits {
+            font-style: italic; /* Make the text italic */
+            font-size: 12px; /* Adjust the font size of the credits text */
+            margin-top: 10px; /* Adjust top margin as needed */
+        }
+
+        .my-picture {
+            width: 40px; /* Adjust the width of your picture */
+            margin-top: 5px; /* Adjust top margin as needed */
+        }
+
+        .quote {
+            font-size: 12px; /* Adjust the font size of the quote */
+            font-style: italic; /* Make the quote text italic */
+            margin-top: 2px; /* Adjust top margin as needed */
+            padding-bottom: 10px;
+        }
+
+        .additional-image {
+            width: 80px; /* Adjust the width of the additional image */
+            margin-top: 5px; /* Adjust top margin as needed */
+            padding: 8px; 
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="Clock image.jpg" alt="" class="additional-image"> <!-- Your clock image before the title -->
+        <h1>DIGITAL CLOCK</h1> <!-- All capital letters for the title -->
+        <div class="quote">Waktu adalah kedisiplinan Tuhan dalam manusia (Time is the God's self-discipline in the lives of humans)</div> <!-- Sub writing in italic and smaller -->
+        <div class="clock-container">
+            <div class="clock" id="clock-cet"></div>
+            <div class="time-zone">Central EUROPEAN Time (CET)- Amsterdam</div>
+            <img src="Tulip.jpg" alt="" class="additional-image">
+        </div>
+        <div class="clock-container">
+            <div class="clock" id="clock-wit"></div>
+            <div class="time-zone">Central INDONESIAN Time (WIT)-Kupang-Indonesia</div>
+            <img src="NTT.jpg" alt="" class="additional-image">
+        </div>
+        <div class="clock-container">
+            <div class="clock" id="clock-ict"></div>
+            <div class="time-zone">Indochina Time (ICT)- Bangkok, THAILAND</div>
+            <img src="Thailand.jpg" alt="" class="additional-image">
+        </div>
+        <div class="clock-container">
+            <div class="clock" id="clock-cot"></div>
+            <div class="time-zone">Colombia Standard Time (COT)- Bogotá, COLOMBIA</div>
+            <img src="Colombia.jpg" alt="" class="additional-image">
+        </div>
+        <img src="Mikael.png" alt="Your Image" class="my-picture"> <!-- Your image after the subheading -->
+        <div id="credits">Copyright by M.M.Soge</div>
+    </div>
+
+    <script>
+        function updateClock() {
+    var currentTime = new Date();
+    var hours = currentTime.getHours();
+    var minutes = currentTime.getMinutes();
+    var seconds = currentTime.getSeconds();
+
+    // Pad single digit minutes and seconds with leading zero
+    minutes = (minutes < 10 ? "0" : "") + minutes;
+    seconds = (seconds < 10 ? "0" : "") + seconds;
+
+    // Convert to Central European Time (CET)
+    var cetHours = hours;
+    var cetAmPm = (hours >= 12) ? "PM" : "AM";
+    if (cetHours > 12) cetHours -= 12;
+    var cetTimeString = (cetHours < 10 ? "0" : "") + cetHours + ":" + minutes + ":" + seconds + " " + cetAmPm;
+
+    // Convert to Central Indonesian Time (WIT) - Kupang, Indonesia
+    var witHours = (hours + 6) % 24; // Kupang, Indonesia is 7 hours ahead of UTC
+    var witAmPm = (witHours >= 12) ? "PM" : "AM";
+    if (witHours > 12) witHours -= 12;
+    var witTimeString = (witHours < 10 ? "0" : "") + witHours + ":" + minutes + ":" + seconds + " " + witAmPm;
+
+    // Convert to Indochina Time (ICT) - Bangkok, Thailand
+    var ictHours = (hours + 5) % 24; // Bangkok, Thailand is 5 hours ahead of UTC
+    var ictAmPm = (ictHours >= 12) ? "PM" : "AM";
+    if (ictHours > 12) ictHours -= 12;
+    var ictTimeString = (ictHours < 10 ? "0" : "") + ictHours + ":" + minutes + ":" + seconds + " " + ictAmPm;
+
+    // Convert to Colombia Standard Time (COT) - Bogotá, Colombia
+    var cotHours = (hours - 7) % 24; // Bogotá, Colombia is 6 hours behind UTC
+    var cotAmPm = (cotHours >= 12) ? "PM" : "AM";
+    if (cotHours > 12) cotHours -= 12;
+    var cotTimeString = (cotHours < 10 ? "0" : "") + cotHours + ":" + minutes + ":" + seconds + " " + cotAmPm;
+
+    // Update the clock elements with the time strings
+    document.getElementById("clock-cet").innerHTML = cetTimeString;
+    document.getElementById("clock-wit").innerHTML = witTimeString;
+    document.getElementById("clock-ict").innerHTML = ictTimeString;
+    document.getElementById("clock-cot").innerHTML = cotTimeString;
+}
+
+        // Call updateClock function every second to update the clocks
+        setInterval(updateClock, 1000);
+
+        // Call updateClock function once initially to avoid delay
+        updateClock();
+    </script>
+</body>
+</html>
