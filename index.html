@@ -57,8 +57,9 @@
        
 
         .clock-image {
-            width: 80px; /* Adjust the width of the clock image */
-            margin-top: 15px; /* Adjust top margin as needed */
+            width: 50px; /* Adjust the width of the clock image */
+            margin-right: 15px; /* Adjust top margin as needed */
+            padding-right: 10px;
         }
 
         #credits {
@@ -85,18 +86,18 @@
             padding: 8px; 
         }
 
-        @media only screen and (max-width: 300px) {
+        @media only screen and (max-width: 200px) {
     .clock {
-        font-size: 15px; /* Adjust the font size for smaller screens */
+        font-size: 3px; /* Adjust the font size for smaller screens */
     }
 }
     </style>
 </head>
 <body>
     <div class="container">
-        <img src="Clock image.jpg" alt="" class="additional-image"> <!-- Your clock image before the title -->
-        <h1>DIGITAL CLOCK</h1> <!-- All capital letters for the title -->
-        <div class="quote">Waktu adalah kedisiplinan Tuhan dalam manusia (Time is the God's self-discipline in the lives of humans)</div> <!-- Sub writing in italic and smaller -->
+        <h1>DIGITAL CLOCK</h1> <!-- Title comes first -->
+        <img src="Clock image.jpg" alt="" class="additional-image"> <!-- Clock image below the title -->
+        <div class="quote"> "waktu adalah kedisiplinan Tuhan di dalam kehidupan manusia" (Time is God's self-discipline in the lives of humans)</div>
         <div class="clock-container">
             <div class="clock" id="clock-cet"></div>
             <div class="time-zone">Central EUROPEAN Time (CET)- Amsterdam</div>
