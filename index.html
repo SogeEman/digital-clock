@@ -17,10 +17,10 @@
         }
 
         .time-zone {
-            font-size: 20px; /* Adjust the font size of the time zone text */
-            font-weight: bold; /* Make the time zone text bold */
-            margin-top: 15px; /* Add top margin to create space between clock and time zone */
-            padding-left: 10px; /* Add left padding for better alignment */
+            font-size: 18px; /* Decreased font size for time zone text */
+           font-weight: bold;
+           margin-top: 15px;
+           padding-left: 10px;
         }
 
         body {
@@ -39,19 +39,22 @@
         }
 
         .clock-container {
-            margin-top: 10px; /* Adjust top margin as needed */
-            text-align: center; /* Align clock and time zone text to center */
-            display: flex; /* Use flexbox to align clock and image horizontally */
-            align-items: center; /* Center clock and image vertically */
-            justify-content: space-between; /* Distribute space evenly between clock and time zone */
-            flex-direction: row; /* Arrange clock and time zone horizontally */
+            margin-top: 10px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-direction: row;
+            width: 90%; /* Adjusted width to fit within the page */
         }
 
         .clock {
-            font-family: Arial, sans-serif; /* Set font for clock */
-            font-size: 50px; /* Adjust the font size of the clock text */
-            margin-bottom: 15px; /* Adjust bottom margin as needed */
-            padding-right: 10px;
+            font-family: Arial, sans-serif;
+            font-size: 40px;
+            margin-bottom: 15px;
+            padding-right: 5px;
+            border-radius: 5px;
+            animation: colorChange 5s infinite alternate; /* Added animation for colorful light effect */
         }
 
        
@@ -66,23 +69,32 @@
             font-style: italic; /* Make the text italic */
             font-size: 12px; /* Adjust the font size of the credits text */
             margin-top: 10px; /* Adjust top margin as needed */
+            margin-bottom: 30px; /* Adjusted bottom margin */
+            text-align: center; /* Center the copyright information */
         }
 
         .my-picture {
-            width: 40px; /* Adjust the width of your picture */
-            margin-top: 5px; /* Adjust top margin as needed */
+            width: 40px;
+            margin-top: 5px;
+            margin-bottom: 20px; /* Adjusted bottom margin */
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .quote {
-            font-size: 15px; /* Adjust the font size of the quote */
-            font-style: italic; /* Make the quote text italic */
-            margin-top: 2px; /* Adjust top margin as needed */
-            padding-bottom: 10px;
-        }
+           font-size: 15px;
+           font-style: italic;
+           margin-top: 2px;
+           padding-bottom: 10px;
+           animation: moveQuote 10s linear infinite; /* Adjust duration and timing function as needed */
+       }
+        
 
         .additional-image {
             width: 80px; /* Adjust the width of the additional image */
             margin-bottom: 20px; /* Adjust top margin as needed */
+            animation: rotateClock 60s linear infinite; /* Adjust duration and timing function as needed */
             
         }
 
@@ -97,6 +109,47 @@
 
     .additional-image {
         width: 60px; /* Adjust clock image size for smaller screens */
+    }
+}
+
+@keyframes colorChange {
+    0% {
+        border: 2px solid #ff0000; /* Red */
+    }
+    25% {
+        border: 2px solid #00ff00; /* Green */
+    }
+    50% {
+        border: 2px solid #0000ff; /* Blue */
+    }
+    75% {
+        border: 2px solid #ffff00; /* Yellow */
+    }
+    100% {
+        border: 2px solid #ff00ff; /* Magenta */
+    }
+}
+
+/* Keyframes animation for quote */
+@keyframes moveQuote {
+    0% {
+        transform: translateX(0%);
+    }
+    50% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(0%);
+    }
+}
+
+/* Keyframes animation for image clock */
+@keyframes rotateClock {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
     }
 }
     </style>
@@ -123,13 +176,18 @@
         </div>
         <div class="clock-container">
             <div class="clock" id="clock-cot"></div>
-            <div class="time-zone">Colombia Standard Time (COT)- Bogotá, COLOMBIA</div>
-            <img src="Colombia.jpg" alt="" class="additional-image">
+            <div class="time-zone">Colombia Standard Time (COT) - Bogotá, Colombia</div>
+            <img src="Colombia.jpg" alt="" class="additional-image">    
         </div>
-        <img src="Mikael.png" alt="Your Image" class="my-picture"> <!-- Your image after the subheading -->
-        <div id="credits">Copyright by M.M.Soge</div>
+        <div class="clock-container">
+            <div class="clock" id="clock-pgt"></div>
+            <div class="time-zone">Papua New Guinea Time (PGT) - Port Moresby, Papua New Guinea</div>
+            <img src="Port Moresby.jpg" alt="" class="additional-image">
+        </div>   
     </div>
-
+    <img src="Mikael.png" alt="Your Image" class="my-picture"> <!-- Your image before the copyright -->
+    <div id="credits">Copyright by M.M.Soge</div>
+</div>     
     <script>
         function updateClock() {
     var currentTime = new Date();
@@ -165,7 +223,15 @@
     if (cotHours > 12) cotHours -= 12;
     var cotTimeString = (cotHours < 10 ? "0" : "") + cotHours + ":" + minutes + ":" + seconds + " " + cotAmPm;
 
+    // Convert to Papua New Guinea Time (PGT) - Port Moresby, Papua New Guinea
+var pgtHours = (hours + 8) % 24; // Port Moresby, Papua New Guinea is 10 hours ahead of UTC
+var pgtAmPm = (pgtHours >= 12) ? "PM" : "AM";
+if (pgtHours > 12) pgtHours -= 12;
+var pgtTimeString = (pgtHours < 10 ? "0" : "") + pgtHours + ":" + minutes + ":" + seconds + " " + pgtAmPm;
+
+
     // Update the clock elements with the time strings
+    document.getElementById("clock-pgt").innerHTML = pgtTimeString;
     document.getElementById("clock-cet").innerHTML = cetTimeString;
     document.getElementById("clock-wit").innerHTML = witTimeString;
     document.getElementById("clock-ict").innerHTML = ictTimeString;
